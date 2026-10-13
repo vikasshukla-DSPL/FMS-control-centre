@@ -31,7 +31,7 @@ export default function FmsManager() {
     return records
       .filter((r) => (dept === 'All' || r.category === dept) && (status === 'All' || r.status === status) &&
         (!needle || `${r.code ?? ''} ${r.title} ${r.category}`.toLowerCase().includes(needle)))
-      .sort((a, b) => ((a.code ?? '999') + a.title).localeCompare((b.code ?? '999') + b.title, undefined, { numeric: true }));
+      .sort((a, b) => ((a.pin ?? 1e9) - (b.pin ?? 1e9)) || ((a.code ?? '999') + a.title).localeCompare((b.code ?? '999') + b.title, undefined, { numeric: true }));
   }, [records, q, dept, status]);
 
   const setFilter = (key, value) => {
@@ -61,7 +61,7 @@ export default function FmsManager() {
     if (ok) update((d) => { d.fms = d.fms.filter((x) => x.id !== r.id); });
   }
 
-  const blank = () => ({ id: newId('r'), code: nextCode(draft.fms), title: '', rawName: '', category: dept !== 'All' ? dept : '', sop: null, fms: null, isNew: true });
+  const blank = () => ({ id: newId('r'), code: nextCode(draft.fms), title: '', rawName: '', category: dept !== 'All' ? dept : '', sop: null, fms: null, pin: null, isNew: true });
 
   return (
     <>
@@ -97,7 +97,7 @@ export default function FmsManager() {
             {rows.map((r) => (
               <tr key={r.id}>
                 <td className="num">{r.code ?? '-'}</td>
-                <td><b>{r.title}</b></td>
+                <td><b>{r.title}</b>{r.pin && <span className="ad-pin" title="Shown at the top of the public registry">Top {r.pin}</span>}</td>
                 <td>{r.category}</td>
                 <td><StatusBadge status={r.status} /></td>
                 <td>
@@ -159,6 +159,7 @@ function FmsForm({ initial, categories, otherCodes, onSave }) {
     category: initial.category,
     fms: initial.fms ?? '',
     sop: initial.sop ?? '',
+    pin: initial.pin ?? '',
   });
   const [errors, setErrors] = useState({});
   const set = (k) => (e) => setF((s) => ({ ...s, [k]: e.target.value }));
@@ -172,6 +173,8 @@ function FmsForm({ initial, categories, otherCodes, onSave }) {
     for (const k of ['fms', 'sop']) {
       if (f[k].trim() && !isHttpUrl(f[k].trim())) er[k] = 'Paste the full link, starting with https://';
     }
+    const pinText = String(f.pin).trim();
+    if (pinText && (!/^\d+$/.test(pinText) || Number(pinText) < 1 || Number(pinText) > 99)) er.pin = 'Enter a whole number from 1 to 99, or leave empty.';
     setErrors(er);
     if (Object.keys(er).length) return;
     const code = f.code.trim();
@@ -185,6 +188,7 @@ function FmsForm({ initial, categories, otherCodes, onSave }) {
       category: f.category.trim(),
       fms: f.fms.trim() || null,
       sop: f.sop.trim() || null,
+      pin: pinText ? Number(pinText) : null,
     });
   }
 
@@ -211,6 +215,9 @@ function FmsForm({ initial, categories, otherCodes, onSave }) {
           <input value={f.sop} onChange={set('sop')} placeholder="https://docs.google.com/document/..." />
           {isHttpUrl(f.sop) && <a className="icon-btn" href={f.sop} target="_blank" rel="noreferrer" aria-label="Test SOP link"><ExternalLink size={16} /></a>}
         </div>
+      </Field>
+      <Field label="Show at top (position)" error={errors.pin} hint="1 shows first. Leave empty for the normal order. Positions are shared, so use different numbers.">
+        <input value={f.pin} onChange={set('pin')} inputMode="numeric" maxLength={2} style={{ maxWidth: 120 }} />
       </Field>
     </form>
   );

@@ -24,6 +24,8 @@
 .links { display: flex; gap: 8px; }
 .lnk { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; text-decoration: none; padding: 5px 10px; border-radius: 6px; background: var(--purple); color: #fff; }
 .lnk:hover { background: var(--purple-600); }
+.lnk.quiet { background: transparent; color: var(--purple); box-shadow: inset 0 0 0 1.5px var(--line); font-weight: 500; }
+.lnk.quiet:hover { background: var(--mist); box-shadow: inset 0 0 0 1.5px var(--lavender); }
 .lnk.off { background: transparent; color: #a79bb9; box-shadow: inset 0 0 0 1px var(--line); text-decoration: line-through; cursor: not-allowed; }
 .empty { text-align: center; color: var(--muted); padding: 40px !important; }
 .empty button { border: 0; background: none; color: var(--purple); font-weight: 600; cursor: pointer; }

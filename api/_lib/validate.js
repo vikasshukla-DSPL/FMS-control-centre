@@ -47,6 +47,11 @@ export function validateData(d) {
     seen.add(rid);
     const code = text(r.code, 'FMS code', { max: 20 });
     const title = text(r.title, `FMS #${i + 1} name`, { max: 200, required: true });
+    let pin = null;
+    if (r.pin !== null && r.pin !== undefined && r.pin !== '') {
+      pin = Number(r.pin);
+      if (!Number.isInteger(pin) || pin < 1 || pin > 99) fail(`Top position for "${title}" must be a whole number from 1 to 99.`);
+    }
     return {
       id: rid,
       code: code || null,
@@ -55,6 +60,7 @@ export function validateData(d) {
       category: text(r.category, `"${title}" department`, { max: 80, required: true }),
       sop: url(r.sop, `SOP link for "${title}"`),
       fms: url(r.fms, `FMS link for "${title}"`),
+      pin,
     };
   });
 

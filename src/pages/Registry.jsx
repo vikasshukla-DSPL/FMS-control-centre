@@ -26,7 +26,10 @@ export default function Registry() {
         (!q || `${r.code ?? ''} ${r.title} ${r.category}`.toLowerCase().includes(q))
     );
     const val = (r) => (sort.key === 'code' ? (r.code ?? '999') + r.title : r[sort.key]);
-    return [...list].sort((a, b) => (val(a) > val(b) ? 1 : val(a) < val(b) ? -1 : 0) * sort.dir);
+    const pinOf = (r) => r.pin ?? 1e9; // featured FMS always stay on top, in their set order
+    return [...list].sort(
+      (a, b) => pinOf(a) - pinOf(b) || (val(a) > val(b) ? 1 : val(a) < val(b) ? -1 : 0) * sort.dir
+    );
   }, [records, query, dept, status, sort]);
 
   const toggleSort = (key) => setSort((s) => ({ key, dir: s.key === key ? -s.dir : 1 }));
@@ -84,7 +87,7 @@ export default function Registry() {
                   <td data-label="Status"><StatusBadge status={r.status} /></td>
                   <td data-label="Links">
                     <div className="links">
-                      <LinkBtn href={safeUrl(r.fms)} icon={<FileSpreadsheet size={15} />} label="FMS" />
+                      <LinkBtn primary href={safeUrl(r.fms)} icon={<FileSpreadsheet size={15} />} label="FMS" />
                       <LinkBtn href={safeUrl(r.sop)} icon={<FileText size={15} />} label="SOP" />
                     </div>
                   </td>
@@ -110,10 +113,10 @@ function SortBtn({ label, k, sort, onClick }) {
   );
 }
 
-function LinkBtn({ href, icon, label }) {
+function LinkBtn({ href, icon, label, primary = false }) {
   if (!href) return <span className="lnk off" title={`No ${label} link yet`}>{icon}{label}</span>;
   return (
-    <a className="lnk" href={href} target="_blank" rel="noreferrer">
+    <a className={`lnk ${primary ? '' : 'quiet'}`} href={href} target="_blank" rel="noreferrer">
       {icon}{label}
     </a>
   );

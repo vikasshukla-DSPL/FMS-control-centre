@@ -34,10 +34,15 @@ export const DEFAULT_DATA = {
 
 // Fill any missing section from the defaults so older saved data keeps working
 // when new fields are added later.
+const DEFAULT_PINS = Object.fromEntries(fms.map((r) => [r.id, r.pin ?? null]));
+
 export function normalizeData(doc) {
   const d = doc || {};
   const out = {
-    fms: Array.isArray(d.fms) ? d.fms : DEFAULT_DATA.fms,
+    // Data saved before the "top of list" field existed gets the bundled order for matching ids.
+    fms: Array.isArray(d.fms)
+      ? d.fms.map((r) => ('pin' in r ? r : { ...r, pin: DEFAULT_PINS[r.id] ?? null }))
+      : DEFAULT_DATA.fms,
     company: { ...DEFAULT_DATA.company, ...(d.company || {}) },
     roles: Array.isArray(d.roles) ? d.roles : DEFAULT_DATA.roles,
     applications: Array.isArray(d.applications) ? d.applications : DEFAULT_DATA.applications,
