@@ -40,7 +40,7 @@ export default function Shell() {
           ))}
         </nav>
         <div className="ad-side-foot">
-          <a href="/" target="_blank" rel="noreferrer"><ExternalLink size={16} /> View live dashboard</a>
+          <a href="/" target="_blank" rel="noreferrer"><ExternalLink size={16} /> View live site</a>
           <div className="ad-user">
             <span>Signed in as <b>{user}</b></span>
             <button onClick={onLogout}><LogOut size={16} /> Sign out</button>

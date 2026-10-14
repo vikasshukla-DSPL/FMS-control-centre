@@ -17,7 +17,7 @@ export default function Company() {
         compact
         title={site.companyHeroTitle}
         subtitle={company.summary}
-        primary={{ to: '/registry', label: 'Back to FMS registry' }}
+        primary={{ to: '/', label: 'Back to FMS registry' }}
       />
 
       <div className="container cp">

@@ -26,7 +26,7 @@ export default function Overview() {
       <Hero
         title={site.overviewTitle}
         subtitle={`${s.total} flow management systems across ${depts.length} departments. ${s.withFms} are live and ${s.notLinked} still need a link.`}
-        primary={{ to: '/registry', label: 'Open FMS registry' }}
+        primary={{ to: '/', label: 'Open FMS registry' }}
         secondary={{ to: '/company', label: 'Company and products' }}
       />
 
@@ -128,7 +128,7 @@ export default function Overview() {
           <article className="panel">
             <div className="panel-head">
               <h2>Needs a link</h2>
-              <Link to="/registry" className="text-link">View all <ExternalLink size={14} /></Link>
+              <Link to="/" className="text-link">View all <ExternalLink size={14} /></Link>
             </div>
             {unlinked.length === 0 && <p className="ov-empty">Every FMS has at least one link.</p>}
             <ul className="todo">

@@ -3,8 +3,8 @@ import { useData } from '../context/DataContext.jsx';
 import { safeUrl } from '../utils/url.js';
 
 const links = [
-  { to: '/', label: 'Dashboard', end: true },
-  { to: '/registry', label: 'FMS registry' },
+  { to: '/', label: 'FMS registry', end: true },
+  { to: '/dashboard', label: 'Dashboard' },
   { to: '/company', label: 'Company and products' },
 ];
 
@@ -24,8 +24,8 @@ export default function Header() {
                 {l.label}
               </NavLink>
             ))}
-            <a className="btn btn-primary" href={safeUrl(company.quoteUrl) || '#'} target="_blank" rel="noreferrer">
-              Request a quote
+            <a className="btn btn-primary" href={safeUrl(company.website) || '#'} target="_blank" rel="noreferrer">
+              Go to Site
             </a>
           </nav>
         </div>

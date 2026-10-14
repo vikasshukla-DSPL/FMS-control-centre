@@ -26,8 +26,9 @@ function PublicSite() {
         <Header />
         <main>
           <Routes>
-            <Route path="/" element={<Overview />} />
-            <Route path="/registry" element={<Registry />} />
+            <Route path="/" element={<Registry />} />
+            <Route path="/dashboard" element={<Overview />} />
+            <Route path="/registry" element={<Navigate to="/" replace />} />
             <Route path="/company" element={<Company />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
