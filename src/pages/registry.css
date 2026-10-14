@@ -21,7 +21,7 @@
 .rg-table .name { font-weight: 600; }
 .sort { border: 0; background: none; cursor: pointer; font-weight: 600; color: inherit; display: inline-flex; align-items: center; gap: 4px; padding: 0; }
 .sort.on { color: var(--purple); }
-.links { display: flex; gap: 8px; }
+.links { display: flex; gap: 8px; flex-wrap: wrap; }
 .lnk { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; text-decoration: none; padding: 5px 10px; border-radius: 6px; background: var(--purple); color: #fff; }
 .lnk:hover { background: var(--purple-600); }
 .lnk.quiet { background: transparent; color: var(--purple); box-shadow: inset 0 0 0 1.5px var(--line); font-weight: 500; }

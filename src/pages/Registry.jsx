@@ -98,7 +98,7 @@ export default function Registry() {
                     <div className="links">
                       <LinkBtn primary href={safeUrl(r.fms)} icon={<FileSpreadsheet size={15} />} label="FMS" />
                       <LinkBtn href={safeUrl(r.sop)} icon={<FileText size={15} />} label="SOP" />
-                      {r.dashboard && <LinkBtn href={safeUrl(r.dashboard)} icon={<LayoutDashboard size={15} />} label="Dashboard" />}
+                      <LinkBtn href={safeUrl(r.dashboard)} icon={<LayoutDashboard size={15} />} label="Dashboard" />
                     </div>
                   </td>
                 </tr>

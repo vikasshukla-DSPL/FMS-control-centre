@@ -104,7 +104,7 @@ export default function FmsManager() {
                   <div className="ad-links">
                     <LinkChip href={r.fms} label="FMS" />
                     <LinkChip href={r.sop} label="SOP" />
-                    {r.dashboard && <LinkChip href={r.dashboard} label="Dashboard" />}
+                    <LinkChip href={r.dashboard} label="Dashboard" />
                   </div>
                 </td>
                 <td className="ad-rowactions">
