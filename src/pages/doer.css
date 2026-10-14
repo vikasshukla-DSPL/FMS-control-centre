@@ -1,0 +1,28 @@
+.dd{--bg:#edf0f2;--card:#fff;--ink:#1c262e;--mute:#62727e;--line:#d5dce1;--steel:#1d4e6b;--late:#b5420f;--lateBg:#fbeee6;--ok:#17744a;--okBg:#e3f4ea;min-height:100vh;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,sans-serif}
+.dd header{background:var(--steel);color:#fff;padding:14px 18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;position:sticky;top:0;z-index:5}
+.dd h1{font-size:18px;margin:0;flex:1;min-width:180px}.dd h1 small{display:block;font-size:12px;font-weight:400;opacity:.8}
+.dd header select,.dd header button{background:#ffffff1f;color:#fff;border:1px solid #ffffff55;border-radius:6px;padding:6px 10px;cursor:pointer;font:inherit}
+.dd header option{color:#000}
+.dd main{max-width:980px;margin:0 auto;padding:16px}
+.dd .sum{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.dd .sum div{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 16px;min-width:130px}
+.dd .sum b{display:block;font-size:26px}.dd .sum span{color:var(--mute);font-size:13px}.dd .sum .l b{color:var(--late)}
+.dd .tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.dd .tools input{flex:1;min-width:180px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font:inherit}
+.dd .chip{border:1px solid var(--line);background:var(--card);border-radius:20px;padding:5px 12px;cursor:pointer;font:inherit;font-size:13px}
+.dd .chip.on{background:var(--steel);color:#fff;border-color:var(--steel)}
+.dd .task{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--steel);border-radius:8px;padding:12px 14px;margin-bottom:10px;display:grid;grid-template-columns:1fr auto;gap:10px 16px}
+.dd .task.late{border-left-color:var(--late)}.dd .task h3{margin:0;font-size:16px}
+.dd .when{font-size:13px;color:var(--mute);margin-top:2px}.dd .late .when b{color:var(--late)}
+.dd .ctx{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:8px;font-size:13px}.dd .ctx span{color:var(--mute)}
+.dd .act{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.dd .act button{border:1px solid var(--ok);background:var(--okBg);color:var(--ok);font:inherit;font-weight:600;border-radius:6px;padding:8px 16px;cursor:pointer;min-width:88px}
+.dd .act button.neg{border-color:var(--late);background:var(--lateBg);color:var(--late)}
+.dd .act button.sure{background:var(--ok);color:#fff}.dd .act button.neg.sure{background:var(--late)}
+.dd .act button:disabled{opacity:.5;cursor:wait}
+.dd .empty{text-align:center;color:var(--mute);padding:40px 10px}
+.dd .login{max-width:340px;margin:60px auto;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px}
+.dd .login h2{margin:0 0 14px}.dd .login select,.dd .login input,.dd .login button{width:100%;margin-bottom:10px;padding:9px;border:1px solid var(--line);border-radius:6px;font:inherit}
+.dd .login button{background:var(--steel);color:#fff;border:0;cursor:pointer}.dd .err{color:var(--late);font-size:13px;min-height:18px}
+.dd .toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:8px}
+@media(max-width:600px){.dd .task{grid-template-columns:1fr}.dd .act{justify-content:flex-start}}

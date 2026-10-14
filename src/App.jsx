@@ -9,6 +9,7 @@ import { DataProvider } from './context/DataContext.jsx';
 
 // The admin panel is a separate bundle: visitors never download it.
 const AdminApp = lazy(() => import('./admin/AdminApp.jsx'));
+const Doer = lazy(() => import('./pages/Doer.jsx'));
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -50,6 +51,7 @@ export default function App() {
           </Suspense>
         }
       />
+      <Route path="/doer" element={<Suspense fallback={null}><Doer /></Suspense>} />
       <Route path="*" element={<PublicSite />} />
     </Routes>
   );

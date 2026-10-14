@@ -61,7 +61,7 @@ export default function FmsManager() {
     if (ok) update((d) => { d.fms = d.fms.filter((x) => x.id !== r.id); });
   }
 
-  const blank = () => ({ id: newId('r'), code: nextCode(draft.fms), title: '', rawName: '', category: dept !== 'All' ? dept : '', sop: null, fms: null, pin: null, isNew: true });
+  const blank = () => ({ id: newId('r'), code: nextCode(draft.fms), title: '', rawName: '', category: dept !== 'All' ? dept : '', sop: null, fms: null, dashboard: null, pin: null, isNew: true });
 
   return (
     <>
@@ -104,6 +104,7 @@ export default function FmsManager() {
                   <div className="ad-links">
                     <LinkChip href={r.fms} label="FMS" />
                     <LinkChip href={r.sop} label="SOP" />
+                    {r.dashboard && <LinkChip href={r.dashboard} label="Dashboard" />}
                   </div>
                 </td>
                 <td className="ad-rowactions">
@@ -159,6 +160,7 @@ function FmsForm({ initial, categories, otherCodes, onSave }) {
     category: initial.category,
     fms: initial.fms ?? '',
     sop: initial.sop ?? '',
+    dashboard: initial.dashboard ?? '',
     pin: initial.pin ?? '',
   });
   const [errors, setErrors] = useState({});
@@ -170,7 +172,7 @@ function FmsForm({ initial, categories, otherCodes, onSave }) {
     const er = {};
     if (!f.title.trim()) er.title = 'Enter the FMS name.';
     if (!f.category.trim()) er.category = 'Pick a department or type a new one.';
-    for (const k of ['fms', 'sop']) {
+    for (const k of ['fms', 'sop', 'dashboard']) {
       if (f[k].trim() && !isHttpUrl(f[k].trim())) er[k] = 'Paste the full link, starting with https://';
     }
     const pinText = String(f.pin).trim();
@@ -188,6 +190,7 @@ function FmsForm({ initial, categories, otherCodes, onSave }) {
       category: f.category.trim(),
       fms: f.fms.trim() || null,
       sop: f.sop.trim() || null,
+      dashboard: f.dashboard.trim() || null,
       pin: pinText ? Number(pinText) : null,
     });
   }
@@ -214,6 +217,12 @@ function FmsForm({ initial, categories, otherCodes, onSave }) {
         <div className="withopen">
           <input value={f.sop} onChange={set('sop')} placeholder="https://docs.google.com/document/..." />
           {isHttpUrl(f.sop) && <a className="icon-btn" href={f.sop} target="_blank" rel="noreferrer" aria-label="Test SOP link"><ExternalLink size={16} /></a>}
+        </div>
+      </Field>
+      <Field label="Dashboard link" error={errors.dashboard} hint="Doer dashboard (Apps Script web app) for this FMS.">
+        <div className="withopen">
+          <input value={f.dashboard} onChange={set('dashboard')} placeholder="https://script.google.com/macros/s/.../exec" />
+          {isHttpUrl(f.dashboard) && <a className="icon-btn" href={f.dashboard} target="_blank" rel="noreferrer" aria-label="Test Dashboard link"><ExternalLink size={16} /></a>}
         </div>
       </Field>
       <Field label="Show at top (position)" error={errors.pin} hint="1 shows first. Leave empty for the normal order. Positions are shared, so use different numbers.">

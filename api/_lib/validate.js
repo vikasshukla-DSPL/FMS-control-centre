@@ -60,6 +60,7 @@ export function validateData(d) {
       category: text(r.category, `"${title}" department`, { max: 80, required: true }),
       sop: url(r.sop, `SOP link for "${title}"`),
       fms: url(r.fms, `FMS link for "${title}"`),
+      dashboard: url(r.dashboard, `Dashboard link for "${title}"`),
       pin,
     };
   });

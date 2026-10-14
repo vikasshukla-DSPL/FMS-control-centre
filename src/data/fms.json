@@ -456,8 +456,9 @@
     "rawName": "033_Material tracking FMS (Purchase)",
     "category": "Production & Quality",
     "sop": null,
-    "fms": null,
-    "pin": 3
+    "fms": "https://docs.google.com/spreadsheets/d/15jy-Er_zkpEByal3SXq0YEUI3aeCi1x_QCxZ7lrr1SY/edit?gid=0#gid=0",
+    "pin": 3,
+    "dashboard": null
   },
   {
     "id": "p076",
