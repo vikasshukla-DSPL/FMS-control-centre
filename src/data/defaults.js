@@ -21,8 +21,9 @@ export const DEFAULT_DATA = {
   productFamilies: PRODUCT_FAMILIES,
   site: {
     overviewTitle: 'FMS control centre',
-    registryTitle: 'Every FMS, one searchable list',
-    registrySubtitle: 'Open the working sheet or the SOP for any system in one click.',
+    registryEyebrow: 'Dynemech Vibration Technology',
+    registryHeadline: 'FMS Registry',
+    registryTagline: 'Anti vibration engineering demands precision in every process. Open any flow system in one click.',
     companyHeroTitle: 'Vibration control for industrial machinery',
     ctaTitle: 'Need the right pad for a machine?',
     ctaText: 'Send the machine type, weight and operating speed to get a recommendation.',

@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
 import { Search, Download, FileText, FileSpreadsheet, ArrowUpDown, X } from 'lucide-react';
-import Hero from '../components/Hero.jsx';
+import RegistryHero from '../components/RegistryHero.jsx';
 import StatusBadge from '../components/StatusBadge.jsx';
 import { useData } from '../context/DataContext.jsx';
 import { safeUrl } from '../utils/url.js';
-import { STATUS } from '../utils/metrics.js';
+import { STATUS, summarise } from '../utils/metrics.js';
 import { exportCsv } from '../utils/exportCsv.js';
 import './registry.css';
 
@@ -39,7 +39,16 @@ export default function Registry() {
 
   return (
     <>
-      <Hero compact title={site.registryTitle} subtitle={site.registrySubtitle} />
+      <RegistryHero
+        eyebrow={site.registryEyebrow}
+        headline={site.registryHeadline}
+        tagline={site.registryTagline}
+        stats={[
+          { label: 'Systems', value: total },
+          { label: 'Departments', value: categories.length },
+          { label: 'Live sheets', value: summarise(records).withFms },
+        ]}
+      />
       <div className="container rg">
         <div className="rg-toolbar">
           <label className="rg-search">

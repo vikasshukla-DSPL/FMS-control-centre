@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 
 // A damped sine wave that settles into a flat line: the brand's "vibration under control" motif.
-export function wavePath(width = 1600, height = 150) {
-  const mid = height * 0.62;
+export function wavePath(width = 1600, height = 150, maxAmp = 52, midRatio = 0.62) {
+  const mid = height * midRatio;
   const settleX = width * 0.5;
   let d = `M0 ${mid}`;
   for (let x = 0; x <= settleX; x += 4) {
     const t = x / settleX;
-    const amp = 52 * Math.pow(1 - t, 1.35);
+    const amp = maxAmp * Math.pow(1 - t, 1.35);
     const freq = 6.2 * Math.PI * (0.55 + 0.45 * t);
     const y = mid - amp * Math.sin(t * freq);
     d += ` L${x} ${y.toFixed(1)}`;

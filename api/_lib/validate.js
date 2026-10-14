@@ -108,8 +108,9 @@ export function validateData(d) {
   const s = d.site || {};
   const site = {
     overviewTitle: text(s.overviewTitle, 'Dashboard heading', { max: 120 }),
-    registryTitle: text(s.registryTitle, 'Registry heading', { max: 120 }),
-    registrySubtitle: text(s.registrySubtitle, 'Registry subheading', { max: 240 }),
+    registryEyebrow: text(s.registryEyebrow, 'Registry brand line', { max: 80 }),
+    registryHeadline: text(s.registryHeadline, 'Registry heading', { max: 80 }),
+    registryTagline: text(s.registryTagline, 'Registry tagline', { max: 200 }),
     companyHeroTitle: text(s.companyHeroTitle, 'Company page heading', { max: 120 }),
     ctaTitle: text(s.ctaTitle, 'Quote box heading', { max: 120 }),
     ctaText: text(s.ctaText, 'Quote box text', { max: 300 }),

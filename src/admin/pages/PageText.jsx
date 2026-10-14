@@ -9,8 +9,9 @@ const GROUPS = [
   {
     title: 'FMS registry page',
     fields: [
-      ['registryTitle', 'Heading'],
-      ['registrySubtitle', 'Line under the heading'],
+      ['registryEyebrow', 'Brand line', 'Small line above the heading.'],
+      ['registryHeadline', 'Heading'],
+      ['registryTagline', 'Tagline', 'One sentence under the heading.'],
     ],
   },
   {
